@@ -11,6 +11,7 @@ if len(sys.argv) <> 2:
 	sys.exit()
 else:
 	sharedHost = sys.argv[1]
+	duplicateCheckList = []
 
 def validateHostIP(target):
 	isIP = re.match("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$", target)
@@ -34,8 +35,7 @@ def resolve(target):
 def make_requests(sharedTarget):
 	response = [None]
 	responseText = None
-	
-	duplicateCheckList = []
+
 	for requests in range (1, 101):
 		if(request_www_bing_com(response, requests, sharedTarget)):
 			responseText = read_response(response[0])
