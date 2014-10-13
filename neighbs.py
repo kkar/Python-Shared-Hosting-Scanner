@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import socket, sys, re, requests, urllib2
+import socket, sys, re, urllib2, StringIO, gzip, zlib
 from bs4 import BeautifulSoup
 import tldextract
 
@@ -53,7 +53,7 @@ def make_requests(sharedTarget):
 
 def read_response(response):
 	if response.info().get('Content-Encoding') == 'gzip':
-		buf = StringIO(response.read())
+		buf = StringIO.StringIO(response.read())
 		return gzip.GzipFile(fileobj=buf).read()
 
 	elif response.info().get('Content-Encoding') == 'deflate':
