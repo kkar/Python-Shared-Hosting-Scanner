@@ -39,7 +39,7 @@ def make_requests(sharedTarget):
 	for requests in range (1, 101):
 		if(request_www_bing_com(response, requests, sharedTarget)):
 			responseText = read_response(response[0])
-			soup = BeautifulSoup(responseText)
+			soup = BeautifulSoup(responseText, "html.parser")
 			for A in soup.find_all('a', href=True):
 				domain = str('.'.join(list(tldextract.extract(A['href']))[:10]))
 				if not domain.startswith('.') and not len(domain) < 4:
